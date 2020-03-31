@@ -10,12 +10,12 @@
     "dev": "npm run test",
     "test": "ng test",
     "test:once": "ng test --no-watch",
-    "test:ci": "ng test --karma-config karma.ci-config.js",
+    "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadlessCI",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "audit:dev": "npm audit --audit-level=moderate",
     "audit:prod": "npm audit --production --audit-level=moderate",
-    "preflight": "ng lint && npm run test:once && npm run e2e && npm run audit:prod"
+    "preflight": "ng lint && npm run test:ci && npm run e2e && npm run audit:prod"
   },
   "private": true,
   "repository": {
