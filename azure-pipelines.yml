@@ -1,0 +1,68 @@
+# Build numbering format
+name: $(BuildID)
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+trigger:
+  - feat/*
+  - master
+  - release
+
+
+# Schedule
+# ---------
+
+schedules:
+  - cron: "0 12 * * 0"
+    displayName: Weekly Sunday build
+    always: true
+    branches:
+      include:
+      - master
+
+
+# Shared Templates
+# ----------------
+
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: julie-ng/azure-pipelines-templates
+      endpoint: julie-ng # required, even if public repo
+      ref: refs/tags/v1.2.0
+
+# Variables
+# ---------
+
+variables:
+  - group: azure-demos-config # set in DevOps Library
+
+
+# Stages
+# ------
+
+stages:
+
+- stage: Tests
+  displayName: 'Test (Node.js)'
+
+  jobs:
+
+    - job: Audit
+      displayName: Audit Dependencies
+      steps:
+      - script: npm run audit:dev
+        displayName: Audit (Dev)
+        continueOnError: true
+      - script: npm run audit:prod
+        displayName: Audit (Prod)
+
+    - job: Tests
+      displayName: Tests
+      steps:
+      - script: |
+          npm ci
+          npm run lint
+        displayName: Linter
