@@ -66,3 +66,8 @@ stages:
           npm ci
           npm run lint
         displayName: Linter
+
+      - script: |
+          npm ci
+          npm run test:ci
+        displayName: Unit Tests
