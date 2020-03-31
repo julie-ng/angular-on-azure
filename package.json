@@ -5,9 +5,13 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "dev": "ng test",
+    "test": "ng test --no-watch",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "audit:dev": "npm audit --audit-level=moderate",
+    "audit:prod": "npm audit --production --audit-level=moderate",
+    "preflight": "ng lint && npm run test && npm run e2e && npm run audit:prod"
   },
   "private": true,
   "dependencies": {
