@@ -6,8 +6,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --output-path dist/",
+    "build:prod": "npm run build -- --prod",
     "dev": "npm run test",
+    "server": "node ./express.js",
     "test": "ng test",
     "test:once": "ng test --no-watch",
     "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadlessCI",
@@ -32,7 +34,11 @@
     "@angular/platform-browser": "~9.1.0",
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
+    "express": "^4.17.1",
+    "helmet": "^3.22.0",
+    "morgan": "^1.10.0",
     "rxjs": "~6.5.4",
+    "standard-healthcheck": "^0.1.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
