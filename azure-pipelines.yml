@@ -71,3 +71,8 @@ stages:
           npm ci
           npm run test:ci
         displayName: Unit Tests
+
+      - script: |
+          npm ci
+          npm run e2e:ci
+        displayName: E2E Tests (localhost)
